@@ -74,13 +74,13 @@ function handleClearCanvas() {
 
 // Event Listeners
 canvas.addEventListener('mousemove', onMove);
-canvas.addEventListener('touchmove', onMove);
+canvas.addEventListener('touchmove', onMove, false);
 canvas.addEventListener('mousedown', startPainting);
-canvas.addEventListener('touchstart', startPainting);
+canvas.addEventListener('touchstart', startPainting, false);
 canvas.addEventListener('mouseup', cancelPainting);
-canvas.addEventListener('touchend', cancelPainting);
+canvas.addEventListener('touchend', cancelPainting, false);
 canvas.addEventListener('mouseleave', cancelPainting);
-canvas.addEventListener('touchcancel', cancelPainting);
+canvas.addEventListener('touchcancel', cancelPainting, false);
 canvas.addEventListener('click', handleFillCanvas);
 
 selectedColor.addEventListener('change', handleColorChange);
