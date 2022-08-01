@@ -26,7 +26,6 @@ function onMove({ offsetX, offsetY }) {
   ctx.moveTo(offsetX, offsetY);
 }
 function onMobileMove({ changedTouches }) {
-  const
   if (isPainting) {
     ctx.lineTo(changedTouches[0].sreenX, changedTouches[0].sreenY);
     ctx.stroke();
