@@ -25,6 +25,15 @@ function onMove({ offsetX, offsetY }) {
   }
   ctx.moveTo(offsetX, offsetY);
 }
+function onMobileMove({ changedTouches }) {
+  const
+  if (isPainting) {
+    ctx.lineTo(changedTouches[0].sreenX, changedTouches[0].sreenY);
+    ctx.stroke();
+    return;
+  }
+  ctx.moveTo(offsetX, offsetY);
+}
 function startPainting() {
   isPainting = true;
 }
@@ -74,7 +83,7 @@ function handleClearCanvas() {
 
 // Event Listeners
 canvas.addEventListener('mousemove', onMove);
-canvas.addEventListener('touchmove', onMove, false);
+canvas.addEventListener('touchmove', onMobileMove, false);
 canvas.addEventListener('mousedown', startPainting);
 canvas.addEventListener('touchstart', startPainting, false);
 canvas.addEventListener('mouseup', cancelPainting);
