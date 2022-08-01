@@ -37,3 +37,9 @@ strokeRect = rect + stroke
 fillRect = rect + fill
 
 새로운 path를 시작할때 beginPath() 사용
+
+---
+
+rect = moveTo와 lineTo의 결합
+
+lineTo는 moveTo + 선을 긋는 기능
