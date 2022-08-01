@@ -101,3 +101,31 @@ function onClick({ offsetX, offsetY }) {
 canvas.addEventListener('mousemove', onMove);
 canvas.addEventListener('click', onClick);
 ```
+
+---
+
+mouse painting
+
+```tsx
+let isPainting = false;
+
+function onMove({ offsetX, offsetY }) {
+  if (isPainting) {
+    ctx.lineTo(offsetX, offsetY);
+    ctx.stroke();
+    return;
+  }
+  ctx.moveTo(offsetX, offsetY);
+}
+function startPainting() {
+  isPainting = true;
+}
+function cancelPainting() {
+  isPainting = false;
+}
+
+canvas.addEventListener('mousemove', onMove);
+canvas.addEventListener('mousedown', startPainting);
+canvas.addEventListener('mouseup', cancelPainting);
+canvas.addEventListener('mouseleave', cancelPainting);
+```
