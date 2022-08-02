@@ -1,3 +1,4 @@
+const saveBtn = document.getElementById('save');
 const caption = document.getElementById('text');
 const file = document.getElementById('file');
 const clearBtn = document.getElementById('clear-canvas');
@@ -97,6 +98,14 @@ function handleDblClick({ offsetX, offsetY }) {
   ctx.restore();
 }
 
+function handleSaveCanvas() {
+  const url = canvas.toDataURL();
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'my_drawing.png';
+  a.click();
+}
+
 // Event Listeners
 canvas.addEventListener('mousemove', onMove);
 canvas.addEventListener('mousedown', startPainting);
@@ -114,3 +123,4 @@ lineWidth.addEventListener('change', handleLineWidth);
 toggleMode.addEventListener('click', handleToggleMode);
 clearBtn.addEventListener('click', handleClearCanvas);
 file.addEventListener('change', handleFileChange);
+saveBtn.addEventListener('click', handleSaveCanvas);
