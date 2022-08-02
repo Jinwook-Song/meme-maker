@@ -1,3 +1,4 @@
+const file = document.getElementById('file');
 const clearBtn = document.getElementById('clear-canvas');
 const toggleMode = document.getElementById('toggle-mode');
 const colorOptions = [...document.getElementsByClassName('color-option')];
@@ -20,14 +21,6 @@ let isFilling = false;
 function onMove({ offsetX, offsetY }) {
   if (isPainting) {
     ctx.lineTo(offsetX, offsetY);
-    ctx.stroke();
-    return;
-  }
-  ctx.moveTo(offsetX, offsetY);
-}
-function onMobileMove({ changedTouches }) {
-  if (isPainting) {
-    ctx.lineTo(changedTouches[0].sreenX, changedTouches[0].sreenY);
     ctx.stroke();
     return;
   }
@@ -80,15 +73,23 @@ function handleClearCanvas() {
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 }
 
+// File
+function handleFileChange({ target }) {
+  const file = target.files[0];
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = url;
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    file.value = null;
+  };
+}
+
 // Event Listeners
 canvas.addEventListener('mousemove', onMove);
-canvas.addEventListener('touchmove', onMobileMove, false);
 canvas.addEventListener('mousedown', startPainting);
-canvas.addEventListener('touchstart', startPainting, false);
 canvas.addEventListener('mouseup', cancelPainting);
-canvas.addEventListener('touchend', cancelPainting, false);
 canvas.addEventListener('mouseleave', cancelPainting);
-canvas.addEventListener('touchcancel', cancelPainting, false);
 canvas.addEventListener('click', handleFillCanvas);
 
 selectedColor.addEventListener('change', handleColorChange);
@@ -99,3 +100,4 @@ lineWidth.addEventListener('change', handleLineWidth);
 
 toggleMode.addEventListener('click', handleToggleMode);
 clearBtn.addEventListener('click', handleClearCanvas);
+file.addEventListener('change', handleFileChange);
