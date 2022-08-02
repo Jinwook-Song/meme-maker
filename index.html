@@ -9,24 +9,8 @@
     <script type="module" defer src="app.js"></script>
   </head>
   <body>
-    <canvas></canvas>
-    <div class="select-bar">
-      <input
-        type="range"
-        id="line-width"
-        min="1"
-        max="10"
-        step="0.1"
-        value="5"
-      />
-      <input type="color" id="color" />
-      <button id="toggle-mode">FILL</button>
-      <button id="clear-canvas">CLEAR</button>
-      <input type="file" accept="image/*" id="file" />
-      <input type="text" placeholder="👆👆" id="text" />
-      <button id="save">SAVE</button>
-    </div>
     <div class="color-container">
+      <input type="color" id="color" />
       <div
         class="color-option"
         style="background-color: #ea2027"
@@ -77,6 +61,25 @@
         style="background-color: #000000"
         data-color="#000000"
       ></div>
+    </div>
+    <canvas></canvas>
+    <div class="select-bar">
+      <input
+        type="range"
+        id="line-width"
+        min="1"
+        max="10"
+        step="0.1"
+        value="5"
+      />
+      <button id="toggle-mode">FILL</button>
+      <button id="clear-canvas">CLEAR</button>
+      <label for="file">
+        PHOTO
+        <input type="file" accept="image/*" id="file" />
+      </label>
+      <input type="text" placeholder="👆👆" id="text" />
+      <button id="save">SAVE</button>
     </div>
   </body>
 </html>
