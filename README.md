@@ -129,3 +129,51 @@ canvas.addEventListener('mousedown', startPainting);
 canvas.addEventListener('mouseup', cancelPainting);
 canvas.addEventListener('mouseleave', cancelPainting);
 ```
+
+---
+
+file
+
+```tsx
+// File
+function handleFileChange({ target }) {
+  const file = target.files[0];
+  const url = URL.createObjectURL(file);
+  const image = new Image();
+  image.src = url;
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    file.value = null;
+  };
+}
+```
+
+---
+
+text
+
+```tsx
+function handleDblClick({ offsetX, offsetY }) {
+  const text = caption.value;
+  if (!text) return;
+  ctx.save();
+  ctx.lineWidth = 1;
+  ctx.font = '2rem sans-serif';
+  ctx.strokeText(text, offsetX, offsetY);
+  ctx.restore();
+}
+```
+
+---
+
+save
+
+```tsx
+function handleSaveCanvas() {
+  const url = canvas.toDataURL();
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'my_drawing.png';
+  a.click();
+}
+```
