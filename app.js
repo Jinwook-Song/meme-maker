@@ -1,3 +1,4 @@
+const caption = document.getElementById('text');
 const file = document.getElementById('file');
 const clearBtn = document.getElementById('clear-canvas');
 const toggleMode = document.getElementById('toggle-mode');
@@ -12,6 +13,7 @@ const CANVAS_SIZE = innerWidth * 0.4;
 canvas.width = CANVAS_SIZE;
 canvas.height = CANVAS_SIZE;
 ctx.lineWidth = lineWidth.value;
+ctx.lineCap = 'round';
 
 // Paint Mode
 let isPainting = false;
@@ -85,12 +87,23 @@ function handleFileChange({ target }) {
   };
 }
 
+function handleDblClick({ offsetX, offsetY }) {
+  const text = caption.value;
+  if (!text) return;
+  ctx.save();
+  ctx.lineWidth = 1;
+  ctx.font = '2rem sans-serif';
+  ctx.strokeText(text, offsetX, offsetY);
+  ctx.restore();
+}
+
 // Event Listeners
 canvas.addEventListener('mousemove', onMove);
 canvas.addEventListener('mousedown', startPainting);
 canvas.addEventListener('mouseup', cancelPainting);
 canvas.addEventListener('mouseleave', cancelPainting);
 canvas.addEventListener('click', handleFillCanvas);
+canvas.addEventListener('dblclick', handleDblClick);
 
 selectedColor.addEventListener('change', handleColorChange);
 colorOptions.forEach((color) =>
